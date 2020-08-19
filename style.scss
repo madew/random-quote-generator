@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #0ceba0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+.quote {
+  max-width: 45ch;
+  font-family: 'Karla', sans-serif;
+  font-size: 2.25rem;
+  line-height: 1.3;
+  font-weight: 700;
+
+  &__mark {
+    // padding: 2px;
+  }
+
+  &__author {
+    margin-top: 2rem;
+    align-self: flex-end;
+    font-size: 1.25rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+  }
+}
