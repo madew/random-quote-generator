@@ -1,6 +1,6 @@
 // DOM Selectors
 const container = document.querySelector('.container');
-const quote_mark = document.querySelector('.quote__mark');
+const quote = document.querySelector('.quote');
 const quote_author = document.querySelector('.quote__author');
 const copyBtn = document.querySelector('#copy');
 const toolTips = document.querySelectorAll('[data-tooltip]');
@@ -13,37 +13,45 @@ function getRandomQuote() {
   fetch(`${API}?rapidapi-key=${API_KEY}`)
     .then((response) => {
       if (!response.ok) {
-        throw Error('Error');
+        setQuoteToDOM(
+          'Ooops something went wrong, try to refresh page:)',
+          'This page'
+        );
+        throw Error(response.statusText);
       }
 
       return response.json();
     })
     .then((data) => {
       // console.log(data);
-      quote_mark.innerText = `"${data.content}"`;
-      quote_author.innerText = `\u2014 ${data.originator.name}`;
+      setQuoteToDOM(data.content, data.originator.name);
     });
 }
 
 getRandomQuote();
 
-// Generate Colors
-function generateAndSetRandomColors(saturation, ligtness) {
-  const randomColor = Math.floor(Math.random() * 360);
+// Set Quote To DOM
+function setQuoteToDOM(quoteText, quoteAuthor) {
+  const markElement = document.createElement('mark');
+  markElement.classList.add('quote_mark');
+  quote.appendChild(markElement);
+  setHslColorToElement(markElement, randomHue + 180, '75%', '50%');
+  markElement.innerText = `"${quoteText}"`;
 
-  container.style.backgroundColor = `hsl(${randomColor}, ${saturation}, ${ligtness})`;
-  quote_mark.style.backgroundColor = `hsl(${
-    randomColor + 180
-  }, ${saturation}, ${ligtness})`;
-
-  toolTips.forEach((tooltip) => {
-    tooltip.style.backgroundColor = `hsl(${
-      randomColor + 180
-    }, ${saturation}, ${ligtness})`;
-  });
+  quote_author.innerText = `\u2014 ${quoteAuthor}`;
 }
 
-generateAndSetRandomColors('75%', '50%');
+// Generate Colors
+const randomHue = Math.floor(Math.random() * 360);
+
+function setHslColorToElement(el, hue, saturation, ligtness) {
+  el.style.backgroundColor = `hsl(${hue}, ${saturation}, ${ligtness})`;
+}
+
+setHslColorToElement(container, randomHue, '75%', '50%');
+toolTips.forEach((tooltip) => {
+  setHslColorToElement(tooltip, randomHue + 180, '75%', '50%');
+});
 
 // Copy To Clipboard
 function copyToClipboard(str) {
