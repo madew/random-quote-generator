@@ -67,4 +67,57 @@
 
 .icon {
   height: 1.5rem;
+  position: absolute;
+}
+
+[data-tooltip] {
+  position: relative;
+  color: red;
+  text-decoration: none;
+  &:before {
+    position: relative;
+    z-index: 2;
+    top: 30%;
+    right: 80%;
+    padding: 0.5em 1em;
+    white-space: nowrap;
+    content: attr(data-tooltip);
+    color: #111;
+    font-size: 1em;
+    line-height: 1.7em;
+    background-color: white;
+    opacity: 0;
+    transform: translate(-50%, 0);
+    border-radius: 4px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-out;
+    pointer-events: none;
+  }
+  &:after {
+    position: absolute;
+    z-index: 3;
+    display: block;
+    top: 67%;
+    right: 110%;
+    width: 10px;
+    height: 10px;
+    margin-bottom: -4px;
+    content: '';
+    background-color: white;
+    opacity: 0;
+    transform: translate(-50%, 0) rotate(45deg);
+    transition: transform 0.2s ease-out;
+    pointer-events: none;
+  }
+  &:hover,
+  &:focus {
+    &:before {
+      opacity: 1;
+      transform: translate(-50%, -10px);
+    }
+    &:after {
+      opacity: 1;
+      transform: translate(-50%, -10px) rotate(45deg);
+    }
+  }
 }

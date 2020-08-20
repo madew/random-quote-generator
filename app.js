@@ -3,6 +3,7 @@ const container = document.querySelector('.container');
 const quote_mark = document.querySelector('.quote__mark');
 const quote_author = document.querySelector('.quote__author');
 const copyBtn = document.querySelector('#copy');
+const toolTips = document.querySelectorAll('[data-tooltip]');
 
 // API Call
 const API = 'https://quotes15.p.rapidapi.com/quotes/random/';
@@ -27,16 +28,22 @@ function getRandomQuote() {
 getRandomQuote();
 
 // Generate Colors
-function generateRandomColors(saturation, ligtness) {
+function generateAndSetRandomColors(saturation, ligtness) {
   const randomColor = Math.floor(Math.random() * 360);
 
   container.style.backgroundColor = `hsl(${randomColor}, ${saturation}, ${ligtness})`;
   quote_mark.style.backgroundColor = `hsl(${
     randomColor + 180
   }, ${saturation}, ${ligtness})`;
+
+  toolTips.forEach((tooltip) => {
+    tooltip.style.backgroundColor = `hsl(${
+      randomColor + 180
+    }, ${saturation}, ${ligtness})`;
+  });
 }
 
-generateRandomColors('75%', '50%');
+generateAndSetRandomColors('75%', '50%');
 
 // Copy To Clipboard
 function copyToClipboard(str) {
