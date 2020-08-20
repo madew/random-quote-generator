@@ -8,7 +8,6 @@
   display: flex;
   flex-direction: column;
 
-  // background-color: #0ceba0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,7 +22,7 @@
   font-weight: 700;
 
   &__mark {
-    // padding: 2px;
+    padding: 2px;
   }
 
   &__author {
@@ -34,4 +33,38 @@
     font-family: 'Montserrat', sans-serif;
     font-weight: 300;
   }
+}
+
+.menu {
+  position: fixed;
+  top: 25px;
+  right: 25px;
+
+  &__list {
+    display: inline-block;
+  }
+
+  &__item {
+    list-style: none;
+
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__btn {
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+  }
+}
+
+.icon {
+  height: 1.5rem;
 }
