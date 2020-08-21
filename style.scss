@@ -7,11 +7,10 @@
 .container {
   display: flex;
   flex-direction: column;
-
-  display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  padding: 1rem;
 }
 
 .quote {
@@ -66,8 +65,11 @@
 }
 
 .icon {
-  height: 1.5rem;
   position: absolute;
+
+  &__copy {
+    height: 1.5rem;
+  }
 }
 
 [data-tooltip] {

@@ -1,7 +1,7 @@
 // DOM Selectors
-const container = document.querySelector('.container');
-const quote = document.querySelector('.quote');
-const quote_author = document.querySelector('.quote__author');
+const containerEl = document.querySelector('.container');
+const quoteEl = document.querySelector('.quote');
+const quoteAuthorEl = document.querySelector('.quote__author');
 const copyBtn = document.querySelector('#copy');
 const toolTips = document.querySelectorAll('[data-tooltip]');
 
@@ -9,12 +9,12 @@ const toolTips = document.querySelectorAll('[data-tooltip]');
 const API = 'https://quotes15.p.rapidapi.com/quotes/random/';
 const API_KEY = '3bf398bdb6mshdc090e989c8ff4bp194aa4jsn310893005fe8';
 
-function getRandomQuote() {
+function fetchRandomQuote() {
   fetch(`${API}?rapidapi-key=${API_KEY}`)
     .then((response) => {
       if (!response.ok) {
         setQuoteToDOM(
-          'Ooops something went wrong, try to refresh page:)',
+          'Ooops something went wrong, try to refresh page :)',
           'This page'
         );
         throw Error(response.statusText);
@@ -28,27 +28,27 @@ function getRandomQuote() {
     });
 }
 
-getRandomQuote();
+fetchRandomQuote();
 
 // Set Quote To DOM
 function setQuoteToDOM(quoteText, quoteAuthor) {
   const markElement = document.createElement('mark');
   markElement.classList.add('quote_mark');
-  quote.appendChild(markElement);
+  quoteEl.appendChild(markElement);
   setHslColorToElement(markElement, randomHue + 180, '75%', '50%');
   markElement.innerText = `"${quoteText}"`;
 
-  quote_author.innerText = `\u2014 ${quoteAuthor}`;
+  quoteAuthorEl.innerText = `\u2014 ${quoteAuthor}`;
 }
 
-// Generate Colors
+// Generate And Set Colors
 const randomHue = Math.floor(Math.random() * 360);
 
 function setHslColorToElement(el, hue, saturation, ligtness) {
   el.style.backgroundColor = `hsl(${hue}, ${saturation}, ${ligtness})`;
 }
 
-setHslColorToElement(container, randomHue, '75%', '50%');
+setHslColorToElement(containerEl, randomHue, '75%', '50%');
 toolTips.forEach((tooltip) => {
   setHslColorToElement(tooltip, randomHue + 180, '75%', '50%');
 });
@@ -63,6 +63,5 @@ function copyToClipboard(str) {
   document.body.removeChild(el);
 }
 
-copyBtn.addEventListener('click', () =>
-  copyToClipboard(quote_mark.textContent)
-);
+const quoteWithAuthorString = `${quoteEl.textContent} ${quoteAuthorEl.textContent}`;
+copyBtn.addEventListener('click', () => copyToClipboard(quoteWithAuthorString));
