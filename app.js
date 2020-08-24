@@ -8,7 +8,7 @@ const copyBtn = document.querySelector('.menu__btn');
 
 // API Call
 const API = 'https://quotes15.p.rapidapi.com/quotes/random/';
-const API_KEY = 'Your API Key';
+const API_KEY = env.API_KEY;
 
 function fetchRandomQuote() {
   fetch(`${API}?rapidapi-key=${API_KEY}`)
