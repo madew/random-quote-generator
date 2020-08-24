@@ -1,0 +1,10 @@
+name: my workflow
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Hello world action
+      env: # Or as an environment variable
+       API_KEY: ${{ secrets.API_KEY }}
+
